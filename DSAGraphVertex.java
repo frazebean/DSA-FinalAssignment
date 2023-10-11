@@ -11,6 +11,7 @@ public class DSAGraphVertex
     {
         label = inputLabel;
         value = inputValue;
+        linksList = new DSALinkedList();
         visited = false;
     }
 
@@ -25,7 +26,10 @@ public class DSAGraphVertex
         return value;
     }
 
-    // Ignore getAdjacent() for now
+    public DSALinkedList getAdjacent()
+    {
+        return linksList;
+    }
 
     // Mutator
     public void addEdge(DSAGraphVertex vertex)

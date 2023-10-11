@@ -171,25 +171,6 @@ public class DSALinkedList
         }
     }
 
-    public DSAGraphVertex find(DSAGraphVertex target)
-    {
-        boolean resume = true;
-        DSAGraphVertex targetValue = null;
-        DSAListNode node = head;
-
-        while((node != null) && resume)
-        {
-            if(node.value.equals(target))
-            {
-                targetValue = node.value;
-                resume = false;
-            }
-            node = node.next;
-        }
-
-        return targetValue;
-    }
-
     public DSAGraphVertex findVertex(int label)
     {
         DSAGraphVertex foundVertex = null;
@@ -204,6 +185,7 @@ public class DSALinkedList
         return foundVertex;
     }
 
+    // This function makes it so that I can track how many vertices are in the linked list.
     public int count()
     {
         int count = 0;
@@ -217,6 +199,7 @@ public class DSALinkedList
         return count;
     }
 
+    // This function allows getting a specific vertex in a linked list via an index.
     public DSAGraphVertex get(int index)
     {
         if(index < 0 || index >= count())
