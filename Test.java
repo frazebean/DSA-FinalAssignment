@@ -19,6 +19,6 @@ public class Test
         graph.addEdge(54, 78);
         graph.addEdge(54, 69);
 
-        System.out.println(graph.isAdjacent(32, 54));
+        graph.displayAsList();
     }
 }

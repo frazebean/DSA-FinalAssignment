@@ -105,10 +105,29 @@ public class DSAGraph
         return isAdjacent;
     }
 
-    // Function to print the graph
-    public void printGraph()
+    // Accessor
+    public void displayAsList()
     {
-        vertices.printLinkedList();
-        System.out.println();
+        for(int i = 0; i < vertices.count(); i++)
+        {
+            DSAGraphVertex currentVertex = vertices.get(i);
+
+            // Print each vertex in the vertices list.
+            System.out.print(currentVertex.getLabel() + " -> ");
+
+            // For every vertex in the list, we print the adjacent vertices in the links list.
+            for(int j = 0; j < currentVertex.getAdjacent().count(); j++)
+            {
+                System.out.print(currentVertex.getAdjacent().get(j).getLabel());
+
+                if(j < currentVertex.getAdjacent().count() - 1)
+                {
+                    System.out.print(", ");
+                }
+            }
+            
+            // Print a newline
+            System.out.println();
+        }
     }
 }
