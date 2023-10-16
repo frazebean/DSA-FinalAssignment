@@ -4,20 +4,22 @@ public class Test
     {
         DSAGraph graph = new DSAGraph();
 
-        graph.addVertex(1, "Chicken");
-        graph.addVertex(23, "house");
-        graph.addVertex(78, "Fish");
-        graph.addVertex(32, "what");
-        graph.addVertex(69, "Max");
-        graph.addVertex(54, "Chinchilla");
+        graph.addVertex(1, "House");
+        graph.addVertex(2, "Every");
+        graph.addVertex(3, "Weekend");
+        graph.addVertex(4, "House Every Weekend");
+        graph.addVertex(5, "House house house house");
 
-        graph.addEdge(1, 23);
-        graph.addEdge(1, 78);
-        graph.addEdge(78, 32);
-        graph.addEdge(32, 23);
-        graph.addEdge(69, 1);
-        graph.addEdge(54, 78);
-        graph.addEdge(54, 69);
+        graph.addEdge(1, 2);
+        graph.addEdge(3, 2);
+        graph.addEdge(2, 4);
+        graph.addEdge(4, 3);
+        graph.addEdge(5, 4);
+        graph.addEdge(1, 5);
+
+        // NOTE: Always remove edges first. Then remove vertex.
+
+        graph.removeVertex(3);
 
         graph.displayAsList();
     }

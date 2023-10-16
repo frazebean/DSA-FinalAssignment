@@ -3,6 +3,7 @@ public class DSAGraph
     // Class fields
     private DSALinkedList vertices;
     private int edgeCount = 0;
+    private int vertexCount = 0;
 
     // Constructor
     public DSAGraph()
@@ -16,7 +17,39 @@ public class DSAGraph
         DSAGraphVertex newVertex = new DSAGraphVertex(label, value);
 
         vertices.insertLast(newVertex);
+
+        vertexCount++;
     }
+    // Mutator
+    public void removeVertex(int label)
+    {
+        DSAGraphVertex vertexToRemove = vertices.findVertex(label);
+
+        // Before removing the actual vertex, any edges connected to the vertex should also
+        // be removed.
+
+        // We first loop through the vertices list
+        for(int i = 0; i < vertices.count(); i++)
+        {
+            DSAGraphVertex currentVertex = vertices.get(i);
+
+            // For each vertex, we loop through its adjacency list and remove any vertex with
+            // the same label as the label of 'vertexToRemove'
+            for(int j = 0; j < currentVertex.getAdjacent().count(); j++)
+            {
+                if(currentVertex.getAdjacent().get(j).getLabel() == vertexToRemove.getLabel())
+                {
+                    removeEdge(currentVertex.getLabel(), vertexToRemove.getLabel());
+                }
+            }
+        }
+
+        // We finally remove the vertex after removing edges connected to it
+        vertices.remove(vertexToRemove);
+
+        vertexCount--;
+    }
+
     // Mutator
     public void addEdge(int label1, int label2)
     {
@@ -29,6 +62,19 @@ public class DSAGraph
 
         edgeCount++;
     }
+    // Mutator
+    public void removeEdge(int label1, int label2)
+    {
+        DSAGraphVertex vertex1 = vertices.findVertex(label1);
+        DSAGraphVertex vertex2 = vertices.findVertex(label2);
+
+        // Remove 2 vertices in both directions as it is an undirected graph.
+        vertex1.removeEdge(vertex2);
+        vertex2.removeEdge(vertex1);
+
+        edgeCount--;
+    }
+
     // Accessor
     public boolean hasVertex(int label)
     {
@@ -45,7 +91,7 @@ public class DSAGraph
     // Accessor
     public int getVertexCount()
     {
-        return vertices.count();
+        return vertexCount;
     }
     // Accessor
     public int getEdgeCount()

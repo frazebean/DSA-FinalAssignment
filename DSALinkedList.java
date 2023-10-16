@@ -153,6 +153,44 @@ public class DSALinkedList
         return nodeValue;
     }
 
+    // Mutator
+    public DSAGraphVertex remove(DSAGraphVertex valueToRemove)
+    {
+        DSAListNode node = head;
+        boolean nodeRemoved = false;
+        DSAGraphVertex nodeValue = null;
+
+        while(node != null)
+        {
+            if((node.value == valueToRemove) && (!nodeRemoved)) 
+            {
+                // If it's the first node we call removeFirst
+                if(node == head)
+                {
+                    removeFirst();
+                }
+                // If it's the last node we call removeLast
+                else if(node == tail) 
+                {
+                    removeLast();
+                }
+                else 
+                {
+                    nodeValue = node.value;
+                    node.next.prev = node.prev;  // Update the next node's previous reference
+                    node.prev.next = node.next;  // Update the previous node's next reference
+                }
+                nodeRemoved = true;
+            }
+            else 
+            {
+                node = node.next;
+            }
+        }
+
+        return nodeValue;
+    }
+
     public void printLinkedList()
     {
         DSAListNode node = head;
@@ -169,6 +207,7 @@ public class DSALinkedList
             }
             node = node.next;
         }
+        System.out.println();
     }
 
     public DSAGraphVertex findVertex(int label)

@@ -36,6 +36,11 @@ public class DSAGraphVertex
     {
         linksList.insertLast(vertex);
     }
+    // Mutator
+    public void removeEdge(DSAGraphVertex vertex)
+    {
+        linksList.remove(vertex);
+    }
 
     // Mutator
     public void setVisited()
