@@ -1,3 +1,4 @@
+/*
 public class Test 
 {
     public static void main(String[] args) 
@@ -19,8 +20,7 @@ public class Test
 
         // NOTE: Always remove edges first. Then remove vertex.
 
-        graph.removeVertex(3);
-
         graph.displayAsList();
     }
 }
+*/

@@ -12,12 +12,10 @@ public class DSAGraph
     }
 
     // Mutator
-    public void addVertex(int label, Object value)
+    public void addVertex(int label, Shop value)
     {
         DSAGraphVertex newVertex = new DSAGraphVertex(label, value);
-
         vertices.insertLast(newVertex);
-
         vertexCount++;
     }
     // Mutator

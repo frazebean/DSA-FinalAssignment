@@ -2,12 +2,12 @@ public class DSAGraphVertex
 {
     // Class fields
     private int label;
-    private Object value;
+    private Shop value;
     private DSALinkedList linksList;
     private boolean visited;
 
     // Constructor
-    public DSAGraphVertex(int inputLabel, Object inputValue)
+    public DSAGraphVertex(int inputLabel, Shop inputValue)
     {
         label = inputLabel;
         value = inputValue;
@@ -20,8 +20,14 @@ public class DSAGraphVertex
     {
         return label;
     }
+    // Mutator
+    public void setLabel(int pLabel)
+    {
+        label = pLabel;
+    }
+
     // Accessor
-    public Object getValue()
+    public Shop getValue()
     {
         return value;
     }
