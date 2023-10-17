@@ -19,7 +19,8 @@ public class Menu
         while(programRuns)
         {
             // User choice for adding, removing or updating a shop.
-            System.out.print("\nOperation: ");
+            System.out.println("\n(Type 'help' to display the help screen)");
+            System.out.print("Operation: ");
             operationChoice = input.nextLine();
 
             if(operationChoice.equals("1"))  // Adding a shop node
@@ -91,7 +92,8 @@ public class Menu
 
                     while(shopOptionsMenu)
                     {
-                        System.out.print("\nUpdate operation: ");
+                        System.out.println("\n(Type 'help' to display the help screen)");
+                        System.out.print("Update operation: ");
                         shopOptionsChoice = input.nextLine();
 
                         switch(shopOptionsChoice)
@@ -249,7 +251,7 @@ public class Menu
         System.out.println("Please type the number for your desired operation.");
         System.out.println("e.g. '1' for adding a shop.\n");
 
-        System.out.println("NOTE: Please type 'HELP' for this same manual to display.");
+        System.out.println("NOTE: Please type 'help' for this same manual to display.");
         System.out.println("------------------------------------------------------------");
     }
 
@@ -272,7 +274,7 @@ public class Menu
         System.out.println("Please type the number for your desired operation.");
         System.out.println("e.g. '1' for updating shop number.\n");
 
-        System.out.println("NOTE: Please type 'HELP' for this update manual to display.");
+        System.out.println("NOTE: Please type 'help' for this update manual to display.");
         System.out.println("------------------------------------------------------------");
     }
 

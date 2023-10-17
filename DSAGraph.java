@@ -152,6 +152,10 @@ public class DSAGraph
     // Accessor
     public void displayAsList()
     {
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("Adjacency List:");
+
         for(int i = 0; i < vertices.count(); i++)
         {
             DSAGraphVertex currentVertex = vertices.get(i);
@@ -173,5 +177,6 @@ public class DSAGraph
             // Print a newline
             System.out.println();
         }
+        System.out.println("---------------------------------------------------------------------");
     }
 }
