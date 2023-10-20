@@ -41,6 +41,7 @@ public class DSAGraphVertex
     public void addEdge(DSAGraphVertex vertex)
     {
         linksList.insertLast(vertex);
+        linksList.bubbleSort();
     }
     // Mutator
     public void removeEdge(DSAGraphVertex vertex)
@@ -63,6 +64,4 @@ public class DSAGraphVertex
     {
         return visited;
     }
-
-    // Ignore toString() for now
 }

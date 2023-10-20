@@ -16,6 +16,7 @@ public class DSAGraph
     {
         DSAGraphVertex newVertex = new DSAGraphVertex(label, value);
         vertices.insertLast(newVertex);
+        vertices.bubbleSort();
         vertexCount++;
     }
     // Mutator
@@ -178,5 +179,116 @@ public class DSAGraph
             System.out.println();
         }
         System.out.println("---------------------------------------------------------------------");
+    }
+
+    // Searching algorithms //
+
+    // Function that gets unvisited vertex in v's adjacency list
+    public DSAGraphVertex getUnvisitedVertexIn(DSAGraphVertex v)
+    {
+        for(int i = 0; i < v.getAdjacent().count(); i++)
+        {
+            if(v.getAdjacent().get(i).getVisited() == false)
+            {
+                return v.getAdjacent().get(i);
+            }
+        }
+
+        return null;
+    }
+
+    private int getDesiredVertexIndex(int label)
+    {
+        DSAGraphVertex desiredVertex = vertices.findVertex(label);
+        int desiredVertexIndex = -1;
+
+        for(int i = 0; i < vertices.count(); i++)
+        {
+            if(vertices.get(i) == desiredVertex)
+            {
+                desiredVertexIndex = i;
+            }
+        }
+
+        return desiredVertexIndex;
+    }
+
+    // Depth-first search algorithm
+    // Credits to: LaFore textbook for help with implementing the DFS algorithm.
+    public void depthFirstSearch(int startingLabel, int endingLabel)
+    {   
+        int startingVertexIndex = getDesiredVertexIndex(startingLabel);
+        int endingVertexIndex = getDesiredVertexIndex(endingLabel);
+
+        DSAStack S = new DSAStack();
+
+        vertices.get(startingVertexIndex).setVisited();
+        System.out.println(vertices.get(startingVertexIndex).getLabel());
+        S.push(vertices.get(startingVertexIndex));
+
+        boolean reachedEndingVertexIndex = false;
+        while(!S.isEmpty() && !reachedEndingVertexIndex)
+        {
+            DSAGraphVertex v = getUnvisitedVertexIn(S.top());
+            if(v == null)
+            {
+                S.pop();
+            }
+            else
+            {
+                v.setVisited();
+                System.out.println(v.getLabel());
+                S.push(v);
+
+                if(v == vertices.get(endingVertexIndex))
+                {
+                    reachedEndingVertexIndex = true;
+                }
+            }
+        }
+
+        for(int i = 0; i < vertices.count(); i++)
+        {
+            vertices.get(i).clearVisited();
+        }
+    }
+
+    // Breadth-first search algorithm
+    // Credits to: LaFore textbook for help with implementing BFS algorithm
+    public void breadthFirstSearch(int startingLabel, int endingLabel)
+    {
+        int startingVertexIndex = getDesiredVertexIndex(startingLabel);
+        int endingVertexIndex = getDesiredVertexIndex(endingLabel);
+
+        CircularQueue T = new CircularQueue();
+
+        vertices.get(startingVertexIndex).setVisited();
+        System.out.println(vertices.get(startingVertexIndex).getLabel());
+        T.enqueue(vertices.get(startingVertexIndex));
+
+        DSAGraphVertex v2;
+
+        boolean reachedEndingVertexIndex = false;
+        while(!T.isEmpty())
+        {
+            DSAGraphVertex v1 = T.dequeue();
+
+            while(((v2 = getUnvisitedVertexIn(v1)) != null) && !reachedEndingVertexIndex)
+            {   
+                v2.setVisited();
+                System.out.println(v2.getLabel());
+                T.enqueue(v2);
+
+                if(v2 == vertices.get(endingVertexIndex))
+                {
+                    reachedEndingVertexIndex = true;
+                }
+            }
+        }
+
+        for(int i = 0; i < vertices.count(); i++)
+        {
+            vertices.get(i).clearVisited();
+        }
     }
 }

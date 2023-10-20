@@ -256,4 +256,51 @@ public class DSALinkedList
 
         return node.value;
     }
+
+    // This function allows for setting a specific value in the linked list.
+    public void set(int index, DSAGraphVertex valueToBeSet)
+    {
+        if(index < 0 || index >= count())
+        {
+            throw new IndexOutOfBoundsException("Index out of bounds!");
+        }
+
+        int i = 0;
+        DSAListNode node = head;
+        while(i < index)
+        {
+            node = node.next;
+            i++;
+        }
+
+        node.value = valueToBeSet;
+    }
+
+    // Sorting is used for graph traversal
+    public void bubbleSort()
+    {
+        int i, j;
+        DSAGraphVertex temp;
+        boolean swapped;
+
+        for(i = 0; i < this.count() - 1; i++)
+        {
+            swapped = false;
+            for(j = 0; j < this.count() - i - 1; j++)
+            {
+                if(this.get(j).getLabel() > this.get(j+1).getLabel())
+                {
+                    temp = this.get(j);
+                    this.set(j, this.get(j+1));
+                    this.set(j+1, temp);
+                    swapped = true;
+                }
+            }
+
+            if(swapped == false)
+            {
+                break;
+            }
+        }
+    }
 }
