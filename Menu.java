@@ -99,6 +99,7 @@ public class Menu
                         switch(shopOptionsChoice)
                         {
                             case "1":
+                                System.out.println("Enter updated shop number.");
                                 int updatedShopNumber = shopNumber(input);
                                 // Update the shop number
                                 graph.getVertex(shopNumberToUpdate).setLabel(updatedShopNumber);
@@ -106,6 +107,7 @@ public class Menu
                                 break;
 
                             case "2":
+                                System.out.println("Enter updated shop name.");
                                 String updatedShopName = shopName(input);
                                 // Update the shop name
                                 graph.getVertex(shopNumberToUpdate).getValue().setName(updatedShopName);
@@ -113,6 +115,7 @@ public class Menu
                                 break;
 
                             case "3":
+                                System.out.println("Enter updated shop category.");
                                 String updatedShopCategory = shopCategory(input);
                                 // Update the shop category
                                 graph.getVertex(shopNumberToUpdate).getValue().setCategory(updatedShopCategory);
@@ -120,6 +123,7 @@ public class Menu
                                 break;
 
                             case "4":
+                                System.out.println("Enter updated shop location.");
                                 String updatedShopLocation = shopLocation(input);
                                 // Update the shop location
                                 graph.getVertex(shopNumberToUpdate).getValue().setLocation(updatedShopLocation);
@@ -127,6 +131,7 @@ public class Menu
                                 break;
 
                             case "5":
+                                System.out.println("Enter updated shop rating.");
                                 int updatedShopRating = shopRating(input);
                                 // Update the shop rating
                                 graph.getVertex(shopNumberToUpdate).getValue().setRating(updatedShopRating);
