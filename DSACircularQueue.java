@@ -1,7 +1,7 @@
-public class CircularQueue extends DSAQueue
+public class DSACircularQueue extends DSAQueue
 {
     // Class constructor
-    public CircularQueue()
+    public DSACircularQueue()
     {
         queue = new DSALinkedList();
     }

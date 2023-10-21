@@ -219,9 +219,69 @@ public class Menu
             }
             else if(operationChoice.equals("6"))
             {
-                graph.displayAsList();
+                System.out.println("\n(Displaying the path between two shops)");
+
+                System.out.println("\nEnter the first shop's number.");
+                int firstShop = shopNumber(input);
+
+                if(graph.getVertex(firstShop) == null)
+                {
+                    System.out.println("First shop does not exist! Unable to display paths");
+                }
+                else
+                {
+                    System.out.println("Enter the second shop's number.");
+                    int secondShop = shopNumber(input);
+
+                    if(graph.getVertex(secondShop) == null)
+                    {
+                        System.out.println("Second shop does not exist! Unable to display paths");
+                    }
+                    else if(secondShop == firstShop)
+                    {
+                        System.out.println("Second shop cannot be the same as the first shop!");
+                    }
+                    else
+                    {
+                        DSACircularQueue dfsOutput = graph.depthFirstSearch(firstShop, secondShop);
+                        DSACircularQueue bfsOutput = graph.breadthFirstSearch(firstShop, secondShop);
+
+                        /* This section is responsible for printing the traversal path (and notifying if there is no path) */
+                        /* ------------------------------------------------------------------------------------------------------ */
+                        if((shopExists(firstShop, dfsOutput)) && (shopExists(secondShop, dfsOutput)))
+                        {
+                            System.out.println();
+                            System.out.print("Depth-first search path: ");
+                            printGraphTraversal(dfsOutput);
+                        }
+                        else
+                        {
+                            System.out.println();
+                            System.out.println("There is no valid DFS pathway shop " + firstShop + " and shop " + secondShop);
+                        }
+
+                        if((shopExists(firstShop, bfsOutput)) && (shopExists(secondShop, bfsOutput)))
+                        {
+                            System.out.println();
+                            System.out.print("Breadth-first search path: ");
+                            printGraphTraversal(bfsOutput);
+                            System.out.println();
+                        }
+                        else
+                        {
+                            System.out.println("There is no valid BFS pathway shop " + firstShop + " and shop " + secondShop);
+                        }
+                        /* ------------------------------------------------------------------------------------------------------ */
+
+                        printShorterPath(dfsOutput, bfsOutput);
+                    }
+                }
             }
             else if(operationChoice.equals("7"))
+            {
+                graph.displayAsList();
+            }
+            else if(operationChoice.equals("QUIT"))
             {
                 programRuns = false;
             }
@@ -248,8 +308,10 @@ public class Menu
         System.out.println("3) Update a shop's information");
         System.out.println("4) Add pathways between shops");
         System.out.println("5) Removing pathways between shops");
-        System.out.println("6) Display the list");
-        System.out.println("7) Quit program");
+        System.out.println("6) Display the path between two shops");
+        System.out.println("7) Display the list");
+        
+        System.out.println("\nPlease type 'QUIT' (in all capitals) to quit the program!");
 
         System.out.println();
 
@@ -365,5 +427,57 @@ public class Menu
         }
 
         return shopRating;
+    }
+
+    public static boolean shopExists(int shop, DSACircularQueue graphTraversalOutput)
+    {
+        boolean shopExistence = false;
+
+        for(int i = 0; i < graphTraversalOutput.queue.count(); i++)
+        {
+            if(graphTraversalOutput.queue.get(i).getLabel() == shop)
+            {
+                shopExistence = true;
+            }
+        }
+
+        return shopExistence;
+    }
+
+    public static void printGraphTraversal(DSACircularQueue outputQueue)
+    {
+        for(int i = 0; i < outputQueue.queue.count(); i++)
+        {
+            System.out.print(outputQueue.queue.get(i).getLabel());
+
+            if(i < outputQueue.queue.count() - 1)
+            {
+                System.out.print(" -> ");
+            }
+        }
+    }
+
+    public static void printShorterPath(DSACircularQueue dfsOutput, DSACircularQueue bfsOutput)
+    {
+        int numOfPathsDFS = dfsOutput.queue.count();
+        int numOfPathsBFS = bfsOutput.queue.count();
+
+        if(numOfPathsDFS < numOfPathsBFS)
+        {
+            System.out.println("\nThe Depth-First Search algorithm has the shorter path: ");
+            printGraphTraversal(dfsOutput);
+            System.out.println();
+        }
+        else if(numOfPathsBFS < numOfPathsDFS)
+        {
+            System.out.println("\nThe Breadth-First Search algorithm has the shorter path: ");
+            printGraphTraversal(bfsOutput);
+            System.out.println();
+        }
+        else
+        {
+            System.out.println("\nBoth traversal algorithms have the same length.");
+            System.out.println();
+        }
     }
 }

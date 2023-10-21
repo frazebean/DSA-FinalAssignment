@@ -215,15 +215,17 @@ public class DSAGraph
 
     // Depth-first search algorithm
     // Credits to: LaFore textbook for help with implementing the DFS algorithm.
-    public void depthFirstSearch(int startingLabel, int endingLabel)
-    {   
+    public DSACircularQueue depthFirstSearch(int startingLabel, int endingLabel)
+    {
+        DSACircularQueue outputQueue = new DSACircularQueue();
+
         int startingVertexIndex = getDesiredVertexIndex(startingLabel);
         int endingVertexIndex = getDesiredVertexIndex(endingLabel);
 
         DSAStack S = new DSAStack();
 
         vertices.get(startingVertexIndex).setVisited();
-        System.out.println(vertices.get(startingVertexIndex).getLabel());
+        outputQueue.enqueue(vertices.get(startingVertexIndex));
         S.push(vertices.get(startingVertexIndex));
 
         boolean reachedEndingVertexIndex = false;
@@ -237,7 +239,7 @@ public class DSAGraph
             else
             {
                 v.setVisited();
-                System.out.println(v.getLabel());
+                outputQueue.enqueue(v);  // Maybe append to an output queue
                 S.push(v);
 
                 if(v == vertices.get(endingVertexIndex))
@@ -251,32 +253,37 @@ public class DSAGraph
         {
             vertices.get(i).clearVisited();
         }
+
+        return outputQueue;
     }
 
     // Breadth-first search algorithm
     // Credits to: LaFore textbook for help with implementing BFS algorithm
-    public void breadthFirstSearch(int startingLabel, int endingLabel)
+    public DSACircularQueue breadthFirstSearch(int startingLabel, int endingLabel)
     {
+        DSACircularQueue outputQueue = new DSACircularQueue();
+
         int startingVertexIndex = getDesiredVertexIndex(startingLabel);
         int endingVertexIndex = getDesiredVertexIndex(endingLabel);
 
-        CircularQueue T = new CircularQueue();
+        DSACircularQueue T = new DSACircularQueue();
 
         vertices.get(startingVertexIndex).setVisited();
-        System.out.println(vertices.get(startingVertexIndex).getLabel());
+        outputQueue.enqueue(vertices.get(startingVertexIndex));
         T.enqueue(vertices.get(startingVertexIndex));
 
         DSAGraphVertex v2;
 
-        boolean reachedEndingVertexIndex = false;
-        while(!T.isEmpty())
+        boolean stayInOuterLoop = true;
+        while(!T.isEmpty() && stayInOuterLoop)
         {
             DSAGraphVertex v1 = T.dequeue();
 
+            boolean reachedEndingVertexIndex = false;
             while(((v2 = getUnvisitedVertexIn(v1)) != null) && !reachedEndingVertexIndex)
             {   
                 v2.setVisited();
-                System.out.println(v2.getLabel());
+                outputQueue.enqueue(v2);  // Maybe append to an output queue
                 T.enqueue(v2);
 
                 if(v2 == vertices.get(endingVertexIndex))
@@ -284,11 +291,18 @@ public class DSAGraph
                     reachedEndingVertexIndex = true;
                 }
             }
+
+            if(reachedEndingVertexIndex == true)
+            {
+                stayInOuterLoop = false;
+            }
         }
 
         for(int i = 0; i < vertices.count(); i++)
         {
             vertices.get(i).clearVisited();
         }
+
+        return outputQueue;
     }
 }
