@@ -1,14 +1,14 @@
 public class DSAGraph 
 {
     // Class fields
-    private DSALinkedList vertices;
+    private GraphLinkedList vertices;
     private int edgeCount = 0;
     private int vertexCount = 0;
 
     // Constructor
     public DSAGraph()
     {
-        vertices = new DSALinkedList();
+        vertices = new GraphLinkedList();
     }
 
     // Mutator
@@ -106,7 +106,7 @@ public class DSAGraph
         return retrievedVertex;
     }
     // Accessor
-    public DSALinkedList getAdjacent(int label)
+    public GraphLinkedList getAdjacent(int label)
     {
         DSAGraphVertex vertex = vertices.findVertex(label);
 

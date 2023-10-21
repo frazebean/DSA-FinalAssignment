@@ -1,12 +1,12 @@
 public class DSAStack
 {
     // Class fields
-    private DSALinkedList stack;
+    private GraphLinkedList stack;
 
     // Default constructor
     public DSAStack()
     {
-        stack = new DSALinkedList();
+        stack = new GraphLinkedList();
     }
 
     // Accessor 'isEmpty'

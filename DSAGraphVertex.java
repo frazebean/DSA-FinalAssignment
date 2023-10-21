@@ -3,7 +3,7 @@ public class DSAGraphVertex
     // Class fields
     private int label;
     private Shop value;
-    private DSALinkedList linksList;
+    private GraphLinkedList linksList;
     private boolean visited;
 
     // Constructor
@@ -11,7 +11,7 @@ public class DSAGraphVertex
     {
         label = inputLabel;
         value = inputValue;
-        linksList = new DSALinkedList();
+        linksList = new GraphLinkedList();
         visited = false;
     }
 
@@ -32,7 +32,7 @@ public class DSAGraphVertex
         return value;
     }
 
-    public DSALinkedList getAdjacent()
+    public GraphLinkedList getAdjacent()
     {
         return linksList;
     }

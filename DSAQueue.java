@@ -1,7 +1,7 @@
 public class DSAQueue 
 {
     // Class fields
-    protected DSALinkedList queue;
+    protected GraphLinkedList queue;
 
     // Accessor 'isEmpty'
     public boolean isEmpty()

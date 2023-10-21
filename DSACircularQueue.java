@@ -3,7 +3,7 @@ public class DSACircularQueue extends DSAQueue
     // Class constructor
     public DSACircularQueue()
     {
-        queue = new DSALinkedList();
+        queue = new GraphLinkedList();
     }
 
     // Mutator 'enqueue'

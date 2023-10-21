@@ -7,8 +7,11 @@ public class Menu
     {
         DSAGraph graph = new DSAGraph();
 
+        int tableSize = 1000;
+        DSAHashTable table = new DSAHashTable(tableSize);
+
         Scanner input = new Scanner(System.in);
-        boolean programRuns = true, shopOptionsMenu = true;
+        boolean programRuns = true;;
         String operationChoice;
         String shopOptionsChoice;
 
@@ -20,7 +23,7 @@ public class Menu
         {
             // User choice for adding, removing or updating a shop.
             System.out.println("\n(Type 'help' to display the help screen)");
-            System.out.print("Operation: ");
+            System.out.print("\nOperation: ");
             operationChoice = input.nextLine();
 
             if(operationChoice.equals("1"))  // Adding a shop node
@@ -51,6 +54,7 @@ public class Menu
                     Shop newShop = new Shop(shopNumber, shopName, shopCategory, shopLocation, shopRating);
 
                     graph.addVertex(newShop.getNumber(), newShop);
+                    table.put(newShop.getCategory(), newShop);
                 }
                 else
                 {
@@ -71,11 +75,18 @@ public class Menu
                 }
                 else
                 {
+                    // Code responsible for removing shop from table.
+                    String category = graph.getVertex(shopNumberToRemove).getValue().getCategory();
+                    table.remove(category, shopNumberToRemove);
+
+                    // Code responsible for removing shop from graph
                     graph.removeVertex(shopNumberToRemove);
                 }
             }
             else if(operationChoice.equals("3"))  // Updating a shop's information
             {
+                boolean shopOptionsMenu = true;
+
                 System.out.println("\n(Updating a shop's information)");
 
                 System.out.println("\nEnter shop number to be updated.");
@@ -101,9 +112,13 @@ public class Menu
                             case "1":
                                 System.out.println("Enter updated shop number.");
                                 int updatedShopNumber = shopNumber(input);
-                                // Update the shop number
-                                graph.getVertex(shopNumberToUpdate).setLabel(updatedShopNumber);
-                                
+                                // Update the shop number LABEL (the graph key)
+                                DSAGraphVertex vertex = graph.getVertex(shopNumberToUpdate);
+                                vertex.setLabel(updatedShopNumber);
+                                // Update the shop number VALUE (the graph value)
+                                Shop newShop = vertex.getValue();
+                                newShop.setNumber(updatedShopNumber);
+
                                 break;
 
                             case "2":
@@ -117,8 +132,16 @@ public class Menu
                             case "3":
                                 System.out.println("Enter updated shop category.");
                                 String updatedShopCategory = shopCategory(input);
-                                // Update the shop category
-                                graph.getVertex(shopNumberToUpdate).getValue().setCategory(updatedShopCategory);
+
+                                // First, we remove the shop with old category from the graph
+                                table.remove(graph.getVertex(shopNumberToUpdate).getValue().getCategory(), shopNumberToUpdate);
+
+                                // Updating shop category via the graph
+                                Shop updatedShop = graph.getVertex(shopNumberToUpdate).getValue();
+                                updatedShop.setCategory(updatedShopCategory);
+
+                                // Place this category with its new shop into a new linked list.
+                                table.put(updatedShopCategory, updatedShop);
 
                                 break;
 
@@ -279,6 +302,27 @@ public class Menu
             }
             else if(operationChoice.equals("7"))
             {
+                System.out.println("\n(Instant search by category)");
+
+                System.out.println("\nEnter the category.");
+                String categoryInput = shopCategory(input);
+
+                boolean categoryExists = table.checkIfCategoryExists(categoryInput);
+
+                if(categoryExists)
+                {
+                    System.out.println("\nShowing shops in the " + "'" + categoryInput + "'" + " category.");
+                    System.out.println("NOTE: Shops are displayed like this: Number, Name, Location, Rating");
+                    System.out.println();
+                    table.printTable(categoryInput);
+                }
+                else
+                {
+                    System.out.println("\nThis category does not exist!");
+                }
+            }
+            else if(operationChoice.equals("8"))
+            {
                 graph.displayAsList();
             }
             else if(operationChoice.equals("QUIT"))
@@ -309,7 +353,8 @@ public class Menu
         System.out.println("4) Add pathways between shops");
         System.out.println("5) Removing pathways between shops");
         System.out.println("6) Display the path between two shops");
-        System.out.println("7) Display the list");
+        System.out.println("7) Search by category");
+        System.out.println("8) Display the list");
         
         System.out.println("\nPlease type 'QUIT' (in all capitals) to quit the program!");
 

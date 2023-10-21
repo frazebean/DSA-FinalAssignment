@@ -1,4 +1,4 @@
-public class DSALinkedList 
+public class GraphLinkedList 
 {
     // DSAListNode class
     private class DSAListNode
@@ -21,7 +21,7 @@ public class DSALinkedList
     private DSAListNode tail;
 
     // Default constructor
-    public DSALinkedList()
+    public GraphLinkedList()
     {
         head = null;
         tail = null;
