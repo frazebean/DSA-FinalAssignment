@@ -1,5 +1,8 @@
-public class DSACircularQueue extends DSAQueue
+public class DSACircularQueue
 {
+    // Class fields
+    protected GraphLinkedList queue;
+
     // Class constructor
     public DSACircularQueue()
     {
@@ -42,5 +45,11 @@ public class DSACircularQueue extends DSAQueue
             peekValue = queue.peekFirst();
         }
         return peekValue;
+    }
+
+    // Accessor 'isEmpty'
+    public boolean isEmpty()
+    {
+        return queue.isEmpty();
     }
 }   
