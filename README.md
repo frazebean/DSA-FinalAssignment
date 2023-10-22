@@ -28,3 +28,14 @@ ShopStack.java - This is a stack implementation specifically made for storing Sh
 
 Menu.java - This is the main interface for running the program. Run it using the command:
             'java Menu'
+
+
+How to run the program?
+
+To run the program:
+
+1) Open the terminal and type: javac *.java
+2) Still on the terminal, type: java Menu
+
+Once you finish Step 2, the program will start. The first thing shown is the help menu.
+If there is a need to print this help menu again, simply type 'help' in the program.

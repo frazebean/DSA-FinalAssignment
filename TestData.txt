@@ -1,0 +1,77 @@
+There will be 6 test datas used:
+
+Test data 1:
+    Shop number - 1
+    Shop name - ABC Electronics
+    Shop category - Electronics
+    Location - Floor 1 Aisle 3
+    Rating - 5
+
+Test data 2:
+    Shop number - 2
+    Shop name - Delta Computers
+    Shop category - Electronics
+    Location - Floor 2 Aisle 7
+    Rating - 3
+
+Test data 3:
+    Shop number - 3
+    Shop name - AAA Games
+    Shop category - Electronics
+    Location - Floor 1 Aisle 9
+    Rating - 4
+
+Test data 4:
+    Shop number - 4
+    Shop name - Pristine Suits
+    Shop category - Clothing
+    Location - Floor 3 Aisle 1
+    Rating - 3
+
+Test data 5:
+    Shop number - 5
+    Shop name - Cheapo Clothes
+    Shop category - Clothing
+    Location - Floor 2 Aisle 1
+    Rating - 1
+
+Test data 6:
+    Shop number - 6
+    Shop name - OK Shirts
+    Shop category - Clothing
+    Location - Floor 4 Aisle 5
+    Rating - 2
+
+------------------------------------------------------------------------------------------------
+
+After inputting these test data, the graph should be made like this:
+
+1 -> 2, 4, 5, 6
+2 -> 1, 4
+3 -> 4
+4 -> 1, 2, 3
+5 -> 1, 6
+6 -> 1, 5
+
+(This can be achieved by adding pathways between shops, which is operation 4).
+
+------------------------------------------------------------------------------------------------
+
+After testing the BFS and DFS traversal, the hash table can be tested by choosing operation 7 (search by category).
+This operation will prompt for a category to enter. All 6 test data supplied are evenly split
+between the 'Clothing' and 'Electronics' categories. This should allow for testing the hash
+table adequately. Should a user enter a non-existent category (in this context, any input
+that is not 'Clothing' or 'Electronics'), the program will say it does not exist.
+
+When operation 7 is chosen and a valid category is chosen, the hash table is automatically displayed
+in this order:
+
+Number, Name, Location, Rating
+
+To test the shops rating, operation 7 will also ask if the user wants to sort the category by ratings.
+Sorting the category by ratings displays data like this:
+
+Rating, Number, Name, Location
+
+The reason the order is changed if the user chooses to sort by rating is so that users can
+immediately see ratings.
