@@ -222,7 +222,7 @@ public class DSAGraph
         int startingVertexIndex = getDesiredVertexIndex(startingLabel);
         int endingVertexIndex = getDesiredVertexIndex(endingLabel);
 
-        DSAStack S = new DSAStack();
+        GraphStack S = new GraphStack();
 
         vertices.get(startingVertexIndex).setVisited();
         outputQueue.enqueue(vertices.get(startingVertexIndex));

@@ -314,7 +314,38 @@ public class Menu
                     System.out.println("\nShowing shops in the " + "'" + categoryInput + "'" + " category.");
                     System.out.println("NOTE: Shops are displayed like this: Number, Name, Location, Rating");
                     System.out.println();
+                    System.out.println("------------------------------------------------------");
                     table.printTable(categoryInput);
+                    System.out.println("------------------------------------------------------");
+
+                    boolean seekingValidInput = true;
+                    while(seekingValidInput)
+                    {
+                        // Give option for user to sort the shops in the chosen category.
+                        System.out.print("\nWould you like to sort this category by ratings? (Y/N): ");
+                        String choice = input.nextLine();
+
+                        if(choice.equals("Y") || choice.equals("y"))
+                        {
+                            System.out.println("\nNOTE: As you are displaying by ratings, shops are displayed");
+                            System.out.println("like this: Rating, Number, Name, Location");
+                            System.out.println();
+                            System.out.println("------------------------------------------------------");
+                            table.sortCategory(categoryInput);
+                            System.out.println("------------------------------------------------------");
+                            seekingValidInput = false;
+                        }
+                        else if(choice.equals("N") || choice.equals("n"))
+                        {
+                            System.out.println("'No' chosen. Not sorting category by ratings.");
+
+                            seekingValidInput = false;
+                        }
+                        else
+                        {
+                            System.out.println("Invalid choice!");
+                        }
+                    }
                 }
                 else
                 {

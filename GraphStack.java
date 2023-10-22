@@ -1,10 +1,10 @@
-public class DSAStack
+public class GraphStack
 {
     // Class fields
     private GraphLinkedList stack;
 
     // Default constructor
-    public DSAStack()
+    public GraphStack()
     {
         stack = new GraphLinkedList();
     }

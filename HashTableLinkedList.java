@@ -275,32 +275,4 @@ public class HashTableLinkedList
 
         node.value = valueToBeSet;
     }
-
-    // Sorting is used for graph traversal
-    public void bubbleSort()
-    {
-        int i, j;
-        Shop temp;
-        boolean swapped;
-
-        for(i = 0; i < this.count() - 1; i++)
-        {
-            swapped = false;
-            for(j = 0; j < this.count() - i - 1; j++)
-            {
-                if(this.get(j).getNumber() > this.get(j+1).getNumber())
-                {
-                    temp = this.get(j);
-                    this.set(j, this.get(j+1));
-                    this.set(j+1, temp);
-                    swapped = true;
-                }
-            }
-
-            if(swapped == false)
-            {
-                break;
-            }
-        }
-    }
 }

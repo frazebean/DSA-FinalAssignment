@@ -145,4 +145,44 @@ public class DSAHashTable
 
         return categoryExists;
     }
+
+    // Function to sort category by ratings
+    public void sortCategory(String inKey)
+    {
+        ShopStack stack = new ShopStack();
+
+        int hashIndex = hash(inKey);
+        int linkedListLength = hashArray[hashIndex].count();
+
+        DSAHeap heap = new DSAHeap(linkedListLength);
+
+        for(int i = 0; i < linkedListLength; i++)
+        {
+            Shop shop = hashArray[hashIndex].get(i);
+
+            // Add each shop in the linked list into the heap. The shop's rating determines priority.
+            heap.add(shop.getRating(), shop);
+        }
+
+        // This sorts the heap into ascending order.
+        heap.heapSort(heap.getHeapArray(), linkedListLength);
+
+        // As it is ascending order, we first push the values from the heap into a stack.
+        for(int i = 0; i < linkedListLength; i++)
+        {
+            stack.push(heap.getHeapArray()[i].getValue());
+        }
+
+        // We then pop off the shops in the stack to display in descending order.
+        for(int i = 0; i < linkedListLength; i++)
+        {
+            Shop shopToDisplay = stack.pop();
+            int rating = shopToDisplay.getRating();
+            int number = shopToDisplay.getNumber();
+            String name = shopToDisplay.getName();
+            String location = shopToDisplay.getLocation();
+
+            System.out.println(rating + ", " + number + ", " + name + ", " + location);
+        }
+    }
 }
